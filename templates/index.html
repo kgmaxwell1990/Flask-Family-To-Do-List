@@ -6,16 +6,24 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" type="text/css" />
-    <link href="{{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <link rel="stylesheet" href="../static/style.css" type="text/css" />
 
 </head>
 <body>
-    <h1>Log In</h1>
-    <form action="/login">
-        <input type="text" name="username"/>
-        <input type="submit" value="Submit"/>
-    </form>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-10">
+                <h1>FAMILY PLANNER</h1>
+                <h3>Please Enter Your Username</h3>
+                <form action="/login">
+                    <input type="text" name="username"/>
+                    <input type="submit" value="Submit"/>
+                </form>
+                
+            </div>
+        </div>
+    </div>
+    
     
 
 </body>

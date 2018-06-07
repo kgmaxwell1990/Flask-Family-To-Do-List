@@ -1,3 +1,9 @@
+body {
+    background-image: url("/static/images/landscape.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
 container {
     padding-left: 0;
 }
@@ -13,4 +19,18 @@ table, th, td {
 th, td {
     padding: 0px;
     text-align: left;    
+}
+
+a {
+    padding-top: 30px;
+    padding-left: 80px;
+}
+
+.task {
+    margin-left: 50px;
+}
+
+.family_form {
+    padding-left: 100px;
+    
 }

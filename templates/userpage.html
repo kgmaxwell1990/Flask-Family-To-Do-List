@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" type="text/css" />
-    <link href="{{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+    
     <link rel="stylesheet" href="static/style.css" type="text/css" />
 
 </head>
@@ -23,9 +23,8 @@
         </div>
     </div>    
     <h1>Add a member</h1>
-    <form action="/add_member">
+    <form action="/{{username}}/add_member" method="POST">
         <input type="text" name="member"/>
-        <input type="hidden" value="{{username}}"  name="username"/>
         <input type="submit" value="Submit"/>
     </form>
     
@@ -51,7 +50,11 @@
                   <td>Name</td>
               </tr>
               <tr>
-                  <td><a href="daughter.html" class="glyphicon glyphicon-arrow-right">My-list</a></td>
+                  <!--<td><a href="daughter.html" class="glyphicon glyphicon-arrow-right">My-list</a></td>-->
+                  
+                  <td>
+                    <a href="{{username}}/{{ member.name }}">{{ member.name }}</a> 
+                  </td>
               </tr>
              
             </table>
