@@ -3,6 +3,7 @@ from flask import Flask, redirect, render_template, request
 from random import choice
 import json
 from pymongo import MongoClient
+from bson.objectid import ObjectId
 
 MONGODB_URI = os.environ.get("MONGODB_URI")
 MONGODB_NAME = os.environ.get("MONGODB_NAME")
@@ -32,19 +33,7 @@ def add_member(username):
     
 @app.route("/<username>/<member>")
 def get_family_member(username, member):
-    # tasks = [
-    #     {
-    #         "task_name": "Buy Laptop",
-    #         "task_description": "Need for bootcamp",
-    #         "due_date": "21/6/2018",
-    #         "urgent": False
-    #     },
-    #     {
-    #         "task_name": "Learn To Code",
-    #         "task_description": "Coding in Python",
-    #         "due_date": "30/6/2018",
-    #         "urgent": True
-    #     }
+   
     tasks = load_user_tasks_from_mongo(username, member)
     print("*******")
     print(tasks)
@@ -55,15 +44,26 @@ def render_task_form(username, member):
     return render_template("add_task.html", username=username, member=member)
     
     
+@app.route("/<username>/<member>/<task_id>")
+def render_task_id(username, member):
+    return render_template("edittask.html", username=username, member=member)
+        
+    
+    
+    
 @app.route("/<username>/<member>/submit_form", methods=["POST"])
 def add_task(username,member):
+    category_name = request.form.get("category_name")
     task_name = request.form.get("task_name")
     task_description = request.form.get("task_description")
     due_date = request.form.get("due_date")
-    
-    task = {"task_name": task_name,
+    is_urgent = request.form.get("is_urgent")
+    task = {"category_name": category_name,
+            "task_name": task_name,
             "task_description": task_description,
-            "due_date": due_date}
+            "due_date": due_date,
+            "is_urgent": is_urgent
+    }
             
     save_user_tasks_from_mongo(username,member,task)
     return redirect(username + "/" + member)
@@ -100,6 +100,18 @@ def save_user_tasks_from_mongo(username,member,task):
         find_document = db[username].find_one({'name':member})
         find_document['task_list'].append(task)
         db[username].save(find_document)
+
+def delete_user_tasks_from_mongo(username,member,task):
+    with MongoClient(MONGODB_URI) as conn:
+        db = conn[MONGODB_NAME]
+        find_document = db[username].find_one({'name':member})
+        find_document({"_id": ObjectId(task)}).delete(task)
+        db[username].delete(find_document)
+
+
+
+
+
 
 # def load_list_items_from_mongo(username, list_name):
 #     with MongoClient(MONGODB_URI) as conn:

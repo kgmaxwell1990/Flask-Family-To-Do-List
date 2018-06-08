@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" type="text/css" />
   
     <link rel="stylesheet" href="../static/style.css" type="text/css" />
@@ -14,25 +13,13 @@
     
     <h1>{{username}}, edit info for {{member}}</h1>
     <div class="task">
-    <h3>Add Task</h3>
-<div class="row">
+    <h3>Edit Task</h3>
+<div class="container">
     {% extends 'base.html' %} {% block content %}
-    <form action="/{{username}}/{{member}}/submit_form" method="POST" class="col s12">
+    <form action="/{{username}}/{{member}}/<task_id>" method="POST" class="col s12">
        <div class="row">
-          
-        <div class="input-field col s12">
-            <i class="material-icons prefix">poll</i>
-            
-                    <select id="category" name="category_name">
-                  <option value="" disabled selected>Choose Category</option>
-                  {% for cat in categories %}
-                      <option value="{{cat.category_name}}">{{cat.category_name}}</option>
-                  {% endfor %}
-                </select>
-                    <label>Task Category</label>
-                </div>
-            </div>
-         
+           
+          <task_id>
            <div class="row">
             <div class="input-field col s12">
                 <i class="material-icons prefix">assignment</i>
@@ -63,7 +50,6 @@
                   Is Urgent
                 </label>
             </div>
-        </div>
         </div>
         <div class="row">
             <button class="btn waves-effect waves-light" type="submit" name="action">Add Task
