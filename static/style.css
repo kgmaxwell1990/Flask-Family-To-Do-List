@@ -4,11 +4,20 @@ body {
     background-repeat: no-repeat;
 }
 
-container {
-    padding-left: 0;
+/*.index_body {*/
+/*    background-image: url("/static/images/peppa.jpg");*/
+/*    background-size: cover;*/
+    
+/*    background-repeat: no-repeat;*/
+/*}*/
+
+.logbtn {
+    padding-top: 40px;
 }
 
-h1, h2 {
+
+
+h1, h2, h3, h4{
     text-align: center;
 }
 table, th, td {
@@ -31,7 +40,7 @@ a {
 }
 
 .family_form {
-    padding-left: 100px;
+    padding-left: 150px;
     
 }
 
@@ -43,6 +52,25 @@ a {
     /*padding: 0 0.5em;*/
 }
 
+.btn_large {
+    background-color: red;
+    height: 36px;
+    width: 100px;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    
+}
+
+.form_input {
+    padding-left: 130px;
+}
+
 .task_header {
     margin-top: 5px;
 }
+
+

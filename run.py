@@ -47,12 +47,11 @@ def add_task(username,member):
     task_description = request.form.get("task_description")
     due_date = request.form.get("due_date")
     is_urgent = request.form.get("is_urgent")
-    task = {"category_name": category_name,
-            "task_name": task_name,
+    task = {"task_name": task_name,
             "task_description": task_description,
             "due_date": due_date,
             "is_urgent": is_urgent
-    }
+            }
             
     save_user_tasks_from_mongo(username,member,task)
     return redirect(username + "/" + member)

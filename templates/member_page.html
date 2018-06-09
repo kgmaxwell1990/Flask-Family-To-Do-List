@@ -12,8 +12,8 @@
 </head>
 
 <body>
-    <h1>Member Page</h1>
-    <h3>Member Tasks</h3>
+    <h3>Welcome To {{ member }}'s Page</h3>
+    <h4>{{ member }}'s Tasks</h4>
     <div>
         {% extends 'base.html' %} {% block content %}
         <ul class="collapsible" data-collapsible="accordion">
@@ -22,9 +22,9 @@
                 <div class="collapsible-header">
                     <div class="col s4">
                         <a href="/{{username}}/{{member}}/{{task.task_name}}/delete_task" class="waves-effect waves-light btn btn_small blue">Del</a>
-                        <a href="/{{ username }}/{{ member}}/{{task.task_name}}/edit_task" class="waves-effect waves-light btn btn_small blue">Edit</a>
+                        <a href="/{{ username }}/{{ member }}/{{task.task_name}}/edit_task" class="waves-effect waves-light btn btn_small blue">Edit</a>
                     </div>
-                    <div class=" task_header col s8"><i class="material-icons">expand_more</i> {{task.task_name}} - {{task.due_date}}</div>
+                    <div class="task_header col s8"><i class="material-icons">expand_more</i> {{task.task_name}} - {{task.due_date}} <i class="material-icons">expand_more</i></div>
                 </div>
                 <div class="collapsible-body">
                     <span>

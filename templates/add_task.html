@@ -12,10 +12,10 @@
 </head>
 
 <body>
-
-    <h2>{{username}}, edit info for {{member}}</h2>
+    <div class=>
+    <h3>Hi {{username}}, welcome to {{member}}'s planner</h3>
     <div class="task">
-        <h3>Add Task</h3>
+        <h4>Add Task</h4>
         <div class="row">
             {% extends 'base.html' %} {% block content %}
             <form action="/{{username}}/{{member}}/submit_form" method="POST" class="col s12">
@@ -75,7 +75,7 @@
     </div>
 
     {% endblock %}
-
+    </div>
 </body>
 
 </html>

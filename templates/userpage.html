@@ -11,49 +11,44 @@
 
 </head>
 <body>
-    <a href="/"><p>Log Out</p></a>
+    <div class="col-sm-5 logbtn" >
+        <a href="/" class="btn btn_large">LOG OUT</a></div>
     <div class="container">
         <div class="row">
             <div class="col-sm-12">
                 <h1> Welcome {{username}}, LET'S PLAN!!!</h1>
-                
-                <h2>Weekly Planner</h2>
-                
-                </div>
+                <h2>Montly Planner</h2>
+            </div>
         </div>
     </div>    
-    <h1>Add a member</h1>
+    <h3>Add a member</h3>
+    <div class="form_input">
     <form action="/{{username}}/add_member" method="POST">
         <input type="text" name="member"/>
         <input type="submit" value="Submit"/>
     </form>
-    
-    <h2>Members of your family</h2>
-
-
-    
-                
+    </div>
+    <h3>Members of your family</h3>
+   
     <div class="container">
         <div class="row">
         {% if members %}
             {% for member in members %}
             <p></p>
             
-            <div class="col-sm-6">
+            <div class="col-sm-4">
     
             <table style="width:100%">
               <tr>
-                <th rowspan="3"><img src="https://vignette.wikia.nocookie.net/peppapedia/images/f/fc/Daddy_Pig.png/revision/latest?cb=20141227105217" alt="daddy pig" width="200" height="250"></th>
+                <th rowspan="3"><img src="/static/images/daddypig.png" alt="daddy pig" width="200" height="250"></th>
                 <td>{{member.name}}</td>
               </tr>
               <tr>
-                  <td>Name</td>
+                  <td>Go to your list</td>
               </tr>
               <tr>
-                  <!--<td><a href="daughter.html" class="glyphicon glyphicon-arrow-right">My-list</a></td>-->
-                  
                   <td>
-                    <a href="{{username}}/{{ member.name }}">{{ member.name }}</a> 
+                    <a href="{{username}}/{{ member.name }}" class="glyphicon glyphicon-arrow-right">{{ member.name }} task-list</a> 
                   </td>
               </tr>
              
@@ -66,66 +61,7 @@
             
         </div>
     </div>  
-        <!--    <div class="col-sm-6">-->
-    
-        <!--    <table style="width:100%">-->
-        <!--      <tr>-->
-        <!--        <th rowspan="3"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-gm8Tejj86zVxdQUenIl3t2zzRMeX8mHz4gF65XlVgdqMtzbW" alt="mummy pig" width="200" height="250"></th>-->
-        <!--        <td>Mummy</td>-->
-        <!--      </tr>-->
-        <!--      <tr>-->
-        <!--          <td>Name</td>-->
-        <!--      </tr>-->
-        <!--      <tr>-->
-        <!--          <td><a href="mummy.html" class="glyphicon glyphicon-arrow-right">My-list</a></td>-->
-        <!--      </tr>-->
-             
-        <!--    </table>-->
-        <!--    </div>-->
-        <!--</div>-->
-        <!-- <div class="row">-->
-        <!--    <div class="col-sm-6">-->
-    
-        <!--    <table style="width:100%">-->
-        <!--      <tr>-->
-        <!--        <th rowspan="3"><img src="https://i.pinimg.com/736x/b6/a6/72/b6a6725c6c1935f0342cbd91b01d13ae--mama-pig-george-pig-cake.jpg" alt="peppa pig" width="200" height="250"></th>-->
-        <!--        <td>Son</td>-->
-        <!--      </tr>-->
-        <!--      <tr>-->
-        <!--          <td>Name</td>-->
-        <!--      </tr>-->
-        <!--      <tr>-->
-        <!--          <td><a href="son.html" class="glyphicon glyphicon-arrow-right">My-list</a></td>-->
-        <!--      </tr>-->
-             
-        <!--    </table>-->
-        <!--    </div>-->
-        <!--    <div class="col-sm-6">-->
-    
-        <!--    <table style="width:100%">-->
-        <!--      <tr>-->
-        <!--        <th rowspan="3"><img src="https://i.pinimg.com/736x/9a/5b/19/9a5b192fbdb5c729cda76eac223a6271--george-pig-pig-birthday.jpg" alt="peppa minus" width="200" height="250"></th>-->
-        <!--        <td>Daughter</td>-->
-        <!--      </tr>-->
-        <!--      <tr>-->
-        <!--          <td>Name</td>-->
-        <!--      </tr>-->
-        <!--      <tr>-->
-        <!--          <td><a href="daughter.html" class="glyphicon glyphicon-arrow-right">My-list</a></td>-->
-        <!--      </tr>-->
-             
-        <!--    </table>-->
-        <!--    </div>-->
+        
   
-    
-    
-    
-    
-    
-    
-    
-    
-   
-    
 </body>
 </html>
