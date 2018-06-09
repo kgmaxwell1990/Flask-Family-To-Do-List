@@ -33,23 +33,12 @@ def add_member(username):
     
 @app.route("/<username>/<member>")
 def get_family_member(username, member):
-   
     tasks = load_user_tasks_from_mongo(username, member)
-    print("*******")
-    print(tasks)
     return render_template("member_page.html", tasks=tasks, username=username, member=member)
 
 @app.route("/<username>/<member>/new_task_form")
 def render_task_form(username, member):
     return render_template("add_task.html", username=username, member=member)
-    
-    
-@app.route("/<username>/<member>/<task_id>")
-def render_task_id(username, member):
-    return render_template("edittask.html", username=username, member=member)
-        
-    
-    
     
 @app.route("/<username>/<member>/submit_form", methods=["POST"])
 def add_task(username,member):
@@ -68,10 +57,31 @@ def add_task(username,member):
     save_user_tasks_from_mongo(username,member,task)
     return redirect(username + "/" + member)
     
-    
-    
-    
+@app.route("/<username>/<member>/<task_name>/delete_task")
+def delete_task(username, member, task_name):
+    with MongoClient(MONGODB_URI) as conn:
+        db = conn[MONGODB_NAME]
+        selected_member = db[username].find_one({'name':member})
+        if len(selected_member['task_list']) == 1:
+            if task_name == selected_member['task_list'][0]["task_name"]:
+                del selected_member['task_list'][0]
+        
+        for x in range(len(selected_member['task_list']) -1):
+            if task_name == selected_member['task_list'][x]["task_name"]:
+                del selected_member['task_list'][x]
 
+        db[username].save(selected_member)
+    
+    return redirect(username + "/" + member)
+    
+@app.route("/<username>/<member>/<task_name>/edit_task", methods=['GET', 'POST'])
+def edit_task(username, member, task_name):
+    if request.method==("POST"):
+        return "You submitted changes"
+    else:
+        return render_template("edittask.html")
+
+    
 def add_member_to_mongo(username, member):
     with MongoClient(MONGODB_URI) as conn:
         db = conn[MONGODB_NAME]
@@ -101,74 +111,12 @@ def save_user_tasks_from_mongo(username,member,task):
         find_document['task_list'].append(task)
         db[username].save(find_document)
 
-def delete_user_tasks_from_mongo(username,member,task):
-    with MongoClient(MONGODB_URI) as conn:
-        db = conn[MONGODB_NAME]
-        find_document = db[username].find_one({'name':member})
-        find_document({"_id": ObjectId(task)}).delete(task)
-        db[username].delete(find_document)
 
 
 
 
 
 
-# def load_list_items_from_mongo(username, list_name):
-#     with MongoClient(MONGODB_URI) as conn:
-#         db = conn[MONGODB_NAME]
-#         return db[username].find({'name':list_name})
- 
- 
- 
- 
- 
- 
- 
- 
-    
-# @app.route('/insert_task', methods=['POST'])
-# def add_task():
-#     member = request.args.get("member")
-#     username = request.args.get("username")
-    
-    
-#     add_to_mongo(username, member)
-#     return redirect(username)  
-
-
-
-
-
-# @app.route('/insert_task', methods=['POST'])
-# def insert_task():
-#     if tasks in list:
-#         tasks =  mongo.db.tasks
-#         tasks.insert_one(request.form.to_dict())
-#         return redirect(url_for('get_tasks'))
-
-# @app.route("/user.html" )
-# def user():
-#     items = load_list("data/list.json")    
-#     welcome = choice(welcome_messages)
-#     return render_template("daddy.html", msg=welcome, tasks=items)
-
-
-# welcome_messages = ["Hi", "Hello", "Bonjour"]
-
-# def load_list(filename):
-#     if os.path.exists(filename):
-#         with open(filename, "r") as f:
-#             data = f.read()
-#             items = json.loads(data)
-#     else:
-#         items = []
-        
-#     return items
-
-# def save_list(filename, items):
-#     with open(filename, "w") as f:
-#         data = json.dumps(items)
-#         f.write(data)
 
 
 

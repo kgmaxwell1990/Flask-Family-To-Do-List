@@ -36,11 +36,11 @@ a {
 }
 
 .btn_small {
-    height: 24px;
-    width: 60px;
+    height: 36px;
+    width: 80px;
     line-height: 24px;
     margin: 5px 5px;
-    padding: 0 0.5em;
+    /*padding: 0 0.5em;*/
 }
 
 .task_header {
