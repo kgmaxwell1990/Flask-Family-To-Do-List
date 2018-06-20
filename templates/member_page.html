@@ -21,8 +21,9 @@
             <li>
                 <div class="collapsible-header">
                     <div class="col s4">
+                        {{task}}
                         <a href="/{{username}}/{{member}}/{{task.task_name}}/delete_task" class="waves-effect waves-light btn btn_small blue">Del</a>
-                        <a href="/{{ username }}/{{ member }}/{{task.task_name}}/edit_task" class="waves-effect waves-light btn btn_small blue">Edit</a>
+                        <a href="/{{ username }}/{{ member }}/{{task._id}}/edit_task" class="waves-effect waves-light btn btn_small blue">Edit</a>
                     </div>
                     <div class="task_header col s8"><i class="material-icons">expand_more</i> {{task.task_name}} - {{task.due_date}} <i class="material-icons">expand_more</i></div>
                 </div>

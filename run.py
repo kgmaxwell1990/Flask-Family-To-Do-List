@@ -42,7 +42,6 @@ def render_task_form(username, member):
     
 @app.route("/<username>/<member>/submit_form", methods=["POST"])
 def add_task(username,member):
-    category_name = request.form.get("category_name")
     task_name = request.form.get("task_name")
     task_description = request.form.get("task_description")
     due_date = request.form.get("due_date")
@@ -73,12 +72,33 @@ def delete_task(username, member, task_name):
     
     return redirect(username + "/" + member)
     
-@app.route("/<username>/<member>/<task_name>/edit_task", methods=['GET', 'POST'])
-def edit_task(username, member, task_name):
-    if request.method==("POST"):
-        return "You submitted changes"
+
+@app.route("/<username>/<member>/<task_id>/edit_task", methods=['GET', 'POST'])
+def edit_task(username, member, task_id):
+    with MongoClient(MONGODB_URI) as conn:
+        db = conn[MONGODB_NAME]
+        item = db[member].find_one({'_id':ObjectId(task_id)})
+    if request.method=="POST":
+        item['task_name'] = request.form.get('task_name')
+        item['task_description'] = request.form.get('task_description')
+        item['due_date'] = request.form.get('due_date')
+        item['is_urgent'] = request.form.get('is_urgent')
+        with MongoClient(MONGODB_URI) as conn:
+            db = conn[MONGODB_NAME]
+            db[member].save(item)
+            return redirect("/")
+    
     else:
-        return render_template("edittask.html")
+        return render_template("edittask.html", username=username, member=member, task_list=item)
+
+    
+    
+    
+    
+    
+    
+    
+    
 
     
 def add_member_to_mongo(username, member):
@@ -109,7 +129,6 @@ def save_user_tasks_from_mongo(username,member,task):
         find_document = db[username].find_one({'name':member})
         find_document['task_list'].append(task)
         db[username].save(find_document)
-
 
 
 
